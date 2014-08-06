@@ -20,13 +20,13 @@ Installation
 Distribute & Pip
 ~~~~~~~~~~~~~~~~
 
-Installing dweepy is simple with `pip <http://www.pip-installer.org/>`_::
+Installing radiobabel is simple with `pip <http://www.pip-installer.org/>`_::
 
-    $ pip install dweepy
+    $ pip install radiobabel
 
 or, with `easy_install <http://pypi.python.org/pypi/setuptools>`_::
 
-    $ easy_install dweepy
+    $ easy_install radiobabel
 
 But, you really `shouldn't do that <http://www.pip-installer.org/en/latest/other-tools.html#pip-compared-to-easy-install>`_.
 
