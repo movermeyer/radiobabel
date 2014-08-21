@@ -34,7 +34,7 @@ class LookupTests(unittest.TestCase):
 
     def setUp(self):
         load_config()
-        self.client = SoundcloudClient("520a56bd9b446f5c7af3aba0973bd204")
+        self.client = SoundcloudClient(os.environ['SOUNDCLOUD_CLIENT_ID'])
 
     def test_valid_lookup_str(self):
         """Soundcloud: Looking up a valid track (str) returns the expected data
@@ -95,7 +95,7 @@ class SearchTests(unittest.TestCase):
 
     def setUp(self):
         load_config()
-        self.client = SoundcloudClient("520a56bd9b446f5c7af3aba0973bd204")
+        self.client = SoundcloudClient(os.environ['SOUNDCLOUD_CLIENT_ID'])
 
     def test_search_returns_results(self):
         """Soundcloud: Test that search results are returned in the correct format
