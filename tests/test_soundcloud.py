@@ -34,7 +34,7 @@ class LookupTests(unittest.TestCase):
 
     def setUp(self):
         load_config()
-        self.client = SoundcloudClient(os.environ['SOUNDCLOUD_CLIENT_ID'])
+        self.client = SoundcloudClient("520a56bd9b446f5c7af3aba0973bd204")
 
     def test_valid_lookup_str(self):
         """Soundcloud: Looking up a valid track (str) returns the expected data
@@ -55,7 +55,9 @@ class LookupTests(unittest.TestCase):
             'duration_ms': 199180,
             'preview_url': 'https://api.soundcloud.com/tracks/18048610/stream',
             'source_type': 'soundcloud',
-            'image_url': 'https://i1.sndcdn.com/artworks-000008722839-oyzy1n-large.jpg?e76cf77',
+            'image_small': 'https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t67x67.jpg?e76cf77',
+            'image_medium': 'https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t300x300.jpg?e76cf77',
+            'image_large': 'https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t500x500.jpg?e76cf77',
         })
 
     def test_valid_lookup_int(self):
@@ -77,7 +79,9 @@ class LookupTests(unittest.TestCase):
             'duration_ms': 199180,
             'preview_url': 'https://api.soundcloud.com/tracks/18048610/stream',
             'source_type': 'soundcloud',
-            'image_url': 'https://i1.sndcdn.com/artworks-000008722839-oyzy1n-large.jpg?e76cf77',
+            'image_small': 'https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t67x67.jpg?e76cf77',
+            'image_medium': 'https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t300x300.jpg?e76cf77',
+            'image_large': 'https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t500x500.jpg?e76cf77',
         })
 
     def test_invalid_lookup(self):
@@ -91,7 +95,7 @@ class SearchTests(unittest.TestCase):
 
     def setUp(self):
         load_config()
-        self.client = SoundcloudClient(os.environ['SOUNDCLOUD_CLIENT_ID'])
+        self.client = SoundcloudClient("520a56bd9b446f5c7af3aba0973bd204")
 
     def test_search_returns_results(self):
         """Soundcloud: Test that search results are returned in the correct format
