@@ -99,7 +99,7 @@ def _transform_track(track):
 
 class SpotifyClient(object):
 
-    def login_url(self, callback_url, client_id):
+    def login_url(self, callback_url, client_id, client_secret):
         """Generates a login url, for the user to authenticate the app."""
         url = 'https://accounts.spotify.com/authorize/?client_id={0}&response_type=code&redirect_uri={1}&scope=playlist-modify-public%20playlist-modify-private&state=profile%2Factivity'.format(
             client_id, callback_url
