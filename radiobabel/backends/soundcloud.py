@@ -62,9 +62,9 @@ class SoundcloudClient(object):
     def login_url(self, callback_url, client_id, client_secret):
         """Generates a login url, for the user to authenticate the app."""
         self.client = soundcloud.Client(
-            client_id='YOUR_CLIENT_ID',
-            client_secret='YOUR_CLIENT_SECRET',
-            redirect_uri='REDIRECT_URL'
+            client_id=client_id,
+            client_secret=client_secret,
+            redirect_uri=callback_url
         )
         return self.client.authorize_url()
 
@@ -73,14 +73,27 @@ class SoundcloudClient(object):
 
         Returns a dictionary of a auth and user object.
         """
-        auth_data = self.client.exchange_token(code)
+        auth_obj = self.client.exchange_token(code)
+        try:
+            expires_in = auth_obj.expires_in
+            refresh_token = auth_obj.refresh_token
+        except:
+            expires_in = 864000
+            refresh_token = None
 
-        self.client = soundcloud.Client(access_token=auth_data['access_token'])
-        user_data = self.client.get('/me')
+        auth_data = {
+            'access_token': auth_obj.access_token,
+            'refresh_token': refresh_token,
+            'expires_in': expires_in,
+            'scope': auth_obj.scope
+        }
+
+        self.client = soundcloud.Client(access_token=auth_obj.access_token)
+        #user_data = self.client.get('/me')
 
         response = {
             'auth': auth_data,
-            'user': user_data
+            #'user': user_data
         }
 
         return response
