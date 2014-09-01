@@ -34,10 +34,10 @@ def _make_post_request(url, data):
     return response.json()
 
 
-def _make_oauth_request(url, token):
+def _make_oauth_request(url, token, params=None):
     # Use token in authorization header of call
     headers = {'Authorization': 'Bearer {}'.format(token)}
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, params=params)
     # raise an exception if 400 <= response.status_code <= 599
     response.raise_for_status()
     return response.json()
@@ -50,6 +50,14 @@ def _transform_search_response(search_results, offset):
     _track_list = [None for x in range(search_results['tracks']['total'])]
     for idx, track in enumerate(search_results['tracks']['items']):
         transformed_track = _transform_track(track)
+        _track_list[offset + idx] = transformed_track
+    return _track_list
+
+
+def _transform_playlist_response(playlist_tracks, offset):
+    _track_list = [None for x in range(playlist_tracks['total'])]
+    for idx, track in enumerate(playlist_tracks['items']):
+        transformed_track = _transform_track(track['track'])
         _track_list[offset + idx] = transformed_track
     return _track_list
 
@@ -208,8 +216,26 @@ class SpotifyClient(object):
 
         return transform_playlists
 
-    def playlist_tracks(self, user_id, token):
-        pass
+    def playlist_tracks(self, playlist_id, user_id, token, limit=20, offset=0):
+        """Lookup user playlists using the Spotify Web API
+
+        Returns standard radiobabel track list response.
+        """
+        logger.info('Playlist tracks lookup: {0}'.format(user_id))
+        # Max limit for the spotify api is 20
+        if limit > 20:
+            limit = 20
+
+        params = {'limit': limit, 'offset': offset}
+        url = 'https://api.spotify.com/v1/users/{0}/playlists/{1}/tracks'.format(user_id, playlist_id)
+        response = _make_oauth_request(url, token, params)
+        tracks = _transform_playlist_response(response, offset)
+
+        return tracks
 
     def favorites(self, user_id, token):
+        """Lookup user starred tracks using the Spotify Web API.
+
+        Returns standard radiobabel track list response.
+        """
         pass
