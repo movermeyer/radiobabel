@@ -89,11 +89,19 @@ class SoundcloudClient(object):
         }
 
         self.client = soundcloud.Client(access_token=auth_obj.access_token)
-        #user_data = self.client.get('/me')
+        user_obj = self.client.get('/me')
+
+        user_data = {
+            'id': user_obj.id,
+            'country': user_obj.country,
+            'username': user_obj.username,
+            'profile_url': user_obj.permalink_url,
+            'avatar_url': user_obj.avatar_url
+        }
 
         response = {
             'auth': auth_data,
-            #'user': user_data
+            'user': user_data
         }
 
         return response

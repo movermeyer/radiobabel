@@ -123,8 +123,16 @@ class SpotifyClient(object):
             data
         )
 
-        user_data = _make_oauth_request(
+        user_obj = _make_oauth_request(
             'https://api.spotify.com/v1/me', auth_data['access_token'])
+
+        user_data = {
+            'id': user_obj['id'],
+            'country': user_obj['country'],
+            'username': user_obj['display_name'],
+            'profile_url': user_obj['external_urls']['spotify'],
+            'avatar_url': user_obj['images'][0]['url']
+        }
 
         response = {
             'auth': auth_data,
