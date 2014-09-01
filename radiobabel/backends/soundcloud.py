@@ -141,7 +141,7 @@ class SoundcloudClient(object):
         return [_transform_track(x.obj) for x in tracks]
 
     def playlists(self, user_id, token):
-        """Lookup user playlists using the Soundcloud Web API
+        """Lookup user playlists using the Spotify Web API
 
         Returns standard radiobabel playlist list response.
         """
@@ -156,5 +156,15 @@ class SoundcloudClient(object):
 
         return transform_playlists
 
-    def playlist_tracks(self, user_id, token):
+    def playlist_tracks(self, playlist_id, user_id, token, limit=20, offset=0):
+        """Search for tracks using the soundcloud API
+        """
+        logger.info('Searching: Limit {0}, Offset {1}'.format(limit, offset))
+
+        url = '/me/playlists/{0}'.format(playlist_id)
+        playlist_tracks = self.client.get(url, limit=limit, offset=offset)
+
+        return [_transform_track(x) for x in playlist_tracks.tracks]
+
+    def favorites(self, user_id, token):
         pass

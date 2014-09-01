@@ -10,7 +10,7 @@ import logging
 import requests
 
 # local imports
-from radiobabel.errors import TrackNotFound
+from radiobabel.errors import TrackNotFound, PlaylistNotFound
 
 
 logger = logging.getLogger('radiobabel.backends.spotify')
@@ -228,7 +228,11 @@ class SpotifyClient(object):
 
         params = {'limit': limit, 'offset': offset}
         url = 'https://api.spotify.com/v1/users/{0}/playlists/{1}/tracks'.format(user_id, playlist_id)
-        response = _make_oauth_request(url, token, params)
+        try:
+            response = _make_oauth_request(url, token, params)
+        except:
+            raise PlaylistNotFound('Soundcloud: {0}'.format(playlist_id))
+
         tracks = _transform_playlist_response(response, offset)
 
         return tracks
