@@ -22,7 +22,7 @@ class LookupTests(unittest.TestCase):
     def test_lookup(self):
         """Spotify: Looking up a valid track (str) returns the expected data
         """
-        track = self.client.track('6MeNtkNT4ENE5yohNvGqd4')
+        track = self.client.lookup_track('6MeNtkNT4ENE5yohNvGqd4')
         self.assertDictEqual(track, {
             'source_type': 'spotify',
             'source_id': '6MeNtkNT4ENE5yohNvGqd4',
@@ -41,6 +41,7 @@ class LookupTests(unittest.TestCase):
             },
             'duration_ms': 249020,
             'preview_url': 'https://p.scdn.co/mp3-preview/8e9273de2ee2c3df040fe2f2a4c9117007431396',
+            'uri': 'spotify:track:6MeNtkNT4ENE5yohNvGqd4',
             'track_number': 1,
             'image_small': 'https://i.scdn.co/image/804bb6e41d095ff193c5136a3a98a1482acbb983',
             'image_medium': 'https://i.scdn.co/image/b883173d6682bf33f5b8d909467b07639af522c8',
@@ -51,7 +52,7 @@ class LookupTests(unittest.TestCase):
         """Spotify: Looking up an invalid track raises the appropriate error
         """
         with self.assertRaises(TrackNotFound):
-            self.client.track('1')
+            self.client.lookup_track('1')
 
 
 class SearchTests(unittest.TestCase):
@@ -63,5 +64,5 @@ class SearchTests(unittest.TestCase):
     def test_search_returns_results(self):
         """Spotify: Test that search results are returned in the correct format
         """
-        results = self.client.search('everything is awesome')
+        results = self.client.search_tracks('everything is awesome')
         self.assertGreater(len(results), 0)

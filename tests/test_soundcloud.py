@@ -39,7 +39,7 @@ class LookupTests(unittest.TestCase):
     def test_valid_lookup_str(self):
         """Soundcloud: Looking up a valid track (str) returns the expected data
         """
-        track = self.client.track('18048610')
+        track = self.client.lookup_track('18048610')
         self.assertDictEqual(track, {
             'album': None,
             'artists': [
@@ -54,6 +54,7 @@ class LookupTests(unittest.TestCase):
             'name': 'Sleep Rules Everything Around Me',
             'duration_ms': 199180,
             'preview_url': 'https://api.soundcloud.com/tracks/18048610/stream',
+            'uri': 'soundcloud:song/Sleep Rules Everything Around Me.18048610',
             'source_type': 'soundcloud',
             'image_small': 'https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t67x67.jpg?e76cf77',
             'image_medium': 'https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t300x300.jpg?e76cf77',
@@ -63,7 +64,7 @@ class LookupTests(unittest.TestCase):
     def test_valid_lookup_int(self):
         """Soundcloud: Looking up a valid track (str) returns the expected data
         """
-        track = self.client.track(18048610)
+        track = self.client.lookup_track(18048610)
         self.assertDictEqual(track, {
             'album': None,
             'artists': [
@@ -78,6 +79,7 @@ class LookupTests(unittest.TestCase):
             'name': 'Sleep Rules Everything Around Me',
             'duration_ms': 199180,
             'preview_url': 'https://api.soundcloud.com/tracks/18048610/stream',
+            'uri': 'soundcloud:song/Sleep Rules Everything Around Me.18048610',
             'source_type': 'soundcloud',
             'image_small': 'https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t67x67.jpg?e76cf77',
             'image_medium': 'https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t300x300.jpg?e76cf77',
@@ -88,7 +90,7 @@ class LookupTests(unittest.TestCase):
         """Soundcloud: Looking up an invalid track raises the appropriate error
         """
         with self.assertRaises(TrackNotFound):
-            self.client.track('asfasfasfas')
+            self.client.lookup_track('asfasfasfas')
 
 
 class SearchTests(unittest.TestCase):
@@ -100,5 +102,5 @@ class SearchTests(unittest.TestCase):
     def test_search_returns_results(self):
         """Soundcloud: Test that search results are returned in the correct format
         """
-        results = self.client.search('wugazi')
+        results = self.client.search_tracks('wugazi')
         self.assertGreater(len(results), 0)
