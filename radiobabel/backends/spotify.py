@@ -72,6 +72,7 @@ def _transform_track(track):
         ('name', track['name']),
         ('duration_ms', track['duration_ms']),
         ('preview_url', track['preview_url']),
+        ('uri', track['uri']),
         ('track_number', track['track_number']),
         ('image_small', None),
         ('image_medium', None),
@@ -162,7 +163,7 @@ class SpotifyClient(object):
 
         return response
 
-    def track(self, track_id):
+    def lookup_track(self, track_id):
         """Lookup an individual track using the Spotify Web API
 
         radiobabel uses a unified format to show lookup results across all
@@ -180,10 +181,11 @@ class SpotifyClient(object):
 
         return _transform_track(track)
 
-    def search(self, query, limit=20, offset=0):
+    def search_tracks(self, query, limit=20, offset=0):
         """Search for tracks using the spotify API
         """
-        logger.info('Searching: Limit {0}, Offset {1}'.format(limit, offset))
+        logger.info(
+            'Track search: Limit {0}, Offset {1}'.format(limit, offset))
 
         # Max limit for the spotify api is 20
         if limit > 20:
