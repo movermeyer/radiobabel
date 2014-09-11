@@ -238,10 +238,3 @@ class SpotifyClient(object):
         tracks = _transform_playlist_response(response, offset)
 
         return tracks
-
-    def favorites(self, user_id, token, limit=20, offset=0):
-        """Lookup user starred tracks using the Spotify Web API.
-
-        Returns standard radiobabel track list response.
-        """
-        pass
