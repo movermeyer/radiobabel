@@ -24,9 +24,7 @@ logger = logging.getLogger('radiobabel.backends.youtube')
 def safe_url(uri):
     valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
     safe_uri = unicodedata.normalize(
-        'NFKD',
-        unicode(uri)
-    ).encode('ASCII', 'ignore')
+        'NFKD', uri).encode('ASCII', 'ignore')
 
     return re.sub(
         '\s+',
@@ -230,11 +228,12 @@ class YoutubeClient(object):
         url = '{0}videos'.format(self.yt_api_endpoint)
 
         try:
-            track = _make_request(url, params)
+            response = _make_request(url, params)
+            track = _transform_track(response['items'][0])
         except:
             raise TrackNotFound('Youtube: {0}'.format(track_id))
 
-        return _transform_track(track['items'][0])
+        return track
 
     def search_tracks(self, query, limit=20, offset=0):
         """Search for tracks using the Youtube API
