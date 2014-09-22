@@ -22,15 +22,21 @@ logger = logging.getLogger('radiobabel.backends.youtube')
 
 
 def safe_url(uri):
-    valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
+    valid_chars = "-_.()\/ %s%s" % (string.ascii_letters, string.digits)
     safe_uri = unicodedata.normalize(
         'NFKD', uri).encode('ASCII', 'ignore')
 
-    return re.sub(
+    safe_uri = safe_uri.decode(encoding='utf-8')
+
+    clean_uri = re.sub(
         '\s+',
         ' ',
-        ''.join(c for c in safe_uri if c in valid_chars)
+        ''.join(c for c in str(safe_uri) if c in valid_chars)
     ).strip()
+
+    print(clean_uri)
+
+    return clean_uri
 
 
 def _make_request(url, params=None):

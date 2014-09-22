@@ -21,20 +21,21 @@ class LookupTests(unittest.TestCase):
     def test_lookup(self):
         """Youtube: Looking up a valid track (str) returns the expected data
         """
+        self.maxDiff = None
         track = self.client.lookup_track('-catC4tBVyY')
         self.assertDictEqual(track, {
-            'source_type': 'youtube',
-            'source_id': '-catC4tBVyY',
-            'name': 'Frank | Official Trailer',
-            'artists': [],
             'album': None,
-            'duration_ms': 119000,
-            'preview_url': 'youtube:video/Frank Official Trailer.-catC4tBVyY',
-            'uri': 'youtube:video/Frank Official Trailer.-catC4tBVyY',
-            'track_number': 0,
-            'image_small': 'https://i.ytimg.com/vi/-catC4tBVyY/default.jpg',
-            'image_medium': 'https://i.ytimg.com/vi/-catC4tBVyY/mqdefault.jpg',
             'image_large': 'https://i.ytimg.com/vi/-catC4tBVyY/hqdefault.jpg',
+            'image_medium': 'https://i.ytimg.com/vi/-catC4tBVyY/mqdefault.jpg',
+            'duration_ms': 119000,
+            'name': 'Frank | Official Trailer',
+            'image_small': 'https://i.ytimg.com/vi/-catC4tBVyY/default.jpg',
+            'uri': 'youtube:video/Frank Official Trailer.-catC4tBVyY',
+            'preview_url': 'youtube:video/Frank Official Trailer.-catC4tBVyY',
+            'source_type': 'youtube',
+            'artists': [],
+            'source_id': '-catC4tBVyY',
+            'track_number': 0
         })
 
     def test_lookup_with_bad_id(self):
