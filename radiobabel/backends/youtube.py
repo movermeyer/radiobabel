@@ -34,8 +34,6 @@ def safe_url(uri):
         ''.join(c for c in str(safe_uri) if c in valid_chars)
     ).strip()
 
-    print(clean_uri)
-
     return clean_uri
 
 

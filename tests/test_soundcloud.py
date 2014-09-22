@@ -100,7 +100,24 @@ class SearchTests(unittest.TestCase):
         self.client = SoundcloudClient(os.environ['SOUNDCLOUD_CLIENT_ID'])
 
     def test_search_returns_results(self):
-        """Soundcloud: Test that search results are returned in the correct format
+        """Soundcloud: Test that search results are returned
+        in the correct format.
         """
         results = self.client.search_tracks('wugazi')
         self.assertGreater(len(results), 0)
+
+
+class FetchAssociatedTrackTests(unittest.TestCase):
+
+    def setUp(self):
+        load_config()
+        self.client = SoundcloudClient(os.environ['SOUNDCLOUD_CLIENT_ID'])
+
+    def test_fetch_returns_result(self):
+        """Youtube: Test that a fetch, returns a random track.
+        """
+        track_id = '18048610'
+        f_track = self.client.fetch_associated_track(track_id)
+        s_track = self.client.fetch_associated_track(track_id)
+
+        self.assertNotEqual(f_track['source_id'], s_track['source_id'])
