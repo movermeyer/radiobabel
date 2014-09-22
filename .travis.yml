@@ -5,7 +5,7 @@ python: 2.7
 
 env:
   global:
-    - secure: "I0GybBu84p7c5vMyZmlxZPAhcQEDguYYzjfKI2mY8yh1P6HkoBKSkYEvZT623K3m+CuJS++NVR9uOct1Cy9wmnQCAImKbDFU1wuD65vhGWdF1kEprME+ifz0r8FoUK/HpclOGZa9MBJvNXClc+KpFmLEbKB2y3QunPt4RH+yNQU="
+    - secure: "Afb37pdtzDLzNhr/a7Q3VkEzEVYXBRdEq6Y9redmRyZLDrh5o0D92XdSfEMJ9EUuu+n/rLrPTXWlMONtBkejIBFWnyQIStJ0um7iRp3PWlLMUso4XJjPnq9R2WHors2Y7ZDArdfNKxz2LV3CfnxdIYLziGf/P1TiQX24B3INdYc="
   matrix:
     - TOX_ENV=py34
     - TOX_ENV=py33
