@@ -68,7 +68,6 @@ class FetchAssociatedTrackTests(unittest.TestCase):
         """Youtube: Test that a fetch, returns a random track.
         """
         track_id = '-catC4tBVyY'
-        f_track = self.client.fetch_associated_track(track_id)
-        s_track = self.client.fetch_associated_track(track_id)
+        track = self.client.fetch_associated_track(track_id)
 
-        self.assertNotEqual(f_track['source_id'], s_track['source_id'])
+        self.assertNotEqual(track['source_id'], track_id)

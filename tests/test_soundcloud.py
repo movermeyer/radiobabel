@@ -41,24 +41,24 @@ class LookupTests(unittest.TestCase):
         """
         track = self.client.lookup_track('18048610')
         self.assertDictEqual(track, {
-            'album': None,
-            'artists': [
+            "source_type": "soundcloud",
+            "source_id": 18048610,
+            "name": "Sleep Rules Everything Around Me",
+            "artists": [
                 {
-                    'name': 'WUGAZI',
-                    'source_type': 'soundcloud',
-                    'source_id': 5613872,
-                },
+                    "source_type": "soundcloud",
+                    "source_id": 5613872,
+                    "name": "WUGAZI",
+                }
             ],
-            'track_number': 0,
-            'source_id': 18048610,
-            'name': 'Sleep Rules Everything Around Me',
-            'duration_ms': 199180,
-            'preview_url': 'https://api.soundcloud.com/tracks/18048610/stream',
-            'uri': 'soundcloud:song/Sleep Rules Everything Around Me.18048610',
-            'source_type': 'soundcloud',
-            'image_small': 'https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t67x67.jpg?e76cf77',
-            'image_medium': 'https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t300x300.jpg?e76cf77',
-            'image_large': 'https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t500x500.jpg?e76cf77',
+            "album": None,
+            "duration_ms": 199180,
+            "preview_url": "https://api.soundcloud.com/tracks/18048610/stream",
+            "uri": "soundcloud:song/Sleep Rules Everything Around Me.18048610",
+            "track_number": 0,
+            "image_small": "https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t67x67.jpg?debc7fd",
+            "image_medium": "https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t300x300.jpg?debc7fd",
+            "image_large": "https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t500x500.jpg?debc7fd",
         })
 
     def test_valid_lookup_int(self):
@@ -66,24 +66,24 @@ class LookupTests(unittest.TestCase):
         """
         track = self.client.lookup_track(18048610)
         self.assertDictEqual(track, {
-            'album': None,
-            'artists': [
+            "source_type": "soundcloud",
+            "source_id": 18048610,
+            "name": "Sleep Rules Everything Around Me",
+            "artists": [
                 {
-                    'name': 'WUGAZI',
-                    'source_type': 'soundcloud',
-                    'source_id': 5613872,
-                },
+                    "source_type": "soundcloud",
+                    "source_id": 5613872,
+                    "name": "WUGAZI",
+                }
             ],
-            'track_number': 0,
-            'source_id': 18048610,
-            'name': 'Sleep Rules Everything Around Me',
-            'duration_ms': 199180,
-            'preview_url': 'https://api.soundcloud.com/tracks/18048610/stream',
-            'uri': 'soundcloud:song/Sleep Rules Everything Around Me.18048610',
-            'source_type': 'soundcloud',
-            'image_small': 'https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t67x67.jpg?e76cf77',
-            'image_medium': 'https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t300x300.jpg?e76cf77',
-            'image_large': 'https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t500x500.jpg?e76cf77',
+            "album": None,
+            "duration_ms": 199180,
+            "preview_url": "https://api.soundcloud.com/tracks/18048610/stream",
+            "uri": "soundcloud:song/Sleep Rules Everything Around Me.18048610",
+            "track_number": 0,
+            "image_small": "https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t67x67.jpg?debc7fd",
+            "image_medium": "https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t300x300.jpg?debc7fd",
+            "image_large": "https://i1.sndcdn.com/artworks-000008722839-oyzy1n-t500x500.jpg?debc7fd",
         })
 
     def test_invalid_lookup(self):
@@ -117,7 +117,6 @@ class FetchAssociatedTrackTests(unittest.TestCase):
         """Youtube: Test that a fetch, returns a random track.
         """
         track_id = '18048610'
-        f_track = self.client.fetch_associated_track(track_id)
-        s_track = self.client.fetch_associated_track(track_id)
+        track = self.client.fetch_associated_track(track_id)
 
-        self.assertNotEqual(f_track['source_id'], s_track['source_id'])
+        self.assertNotEqual(track['source_id'], track_id)
