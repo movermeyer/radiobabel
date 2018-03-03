@@ -1,7 +1,7 @@
 radiobabel
 ==========
 
-.. image:: https://pypip.in/v/radiobabel/badge.png
+.. image:: https://img.shields.io/pypi/v/radiobabel.svg
     :target: https://pypi.python.org/pypi/radiobabel
     :alt: Latest PyPI version
 
